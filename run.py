@@ -62,4 +62,41 @@ def distcheck():  #function to measure distance
 
     distance = round(distance, 2)       #rounds distance values off to 2 places
 
-    return(distance)
+    return(distance)  
+
+def send_mail_alert():  #function to send email alert
+  to = 'dobg1.91@gmail.com'
+  """
+  gmail_user = input("Please enter full email address...")
+  gmail_password = getpass.getpass()
+  """
+  smtpserver = smtplib.SMTP('smtp.gmail.com', 587)
+  smtpserver.ehlo()
+  smtpserver.starttls()
+  smtpserver.login(gmail_user, gmail_password)
+
+
+  my_msg=("WARNING! Sea Levels have reached Critical Height! Beware of imminent Flooding! Water Height at " + str(mode) + "cm above normal sea level")
+  msg=MIMEText(my_msg)
+
+  msg['Subject']= 'Flood Warning'
+  msg['From']= "Local Flood Defense System"
+  msg['To'] = to
+  smtpserver.sendmail(gmail_user, [to], msg.as_string())
+  smtpserver.quit()
+  print("Email sent to " + str(to))
+
+
+def updateThingSpeak(): #sends data to a webpage
+   print('starting...') 
+   baseURL = 'https://api.thingspeak.com/update?api_key=%s' % myAPI  
+
+
+   try:
+       print("The mode being sent to the web is " + str(mode) + "cm") 
+       f = urlopen(baseURL + "&field1=%s" % (str(mode))) 
+       print (f.read()) 
+       f.close() 
+       sleep(30) #uploads sensor values every 30 secs
+   except: 
+       print('oops that did not work...')   
