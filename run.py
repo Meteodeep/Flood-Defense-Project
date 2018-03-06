@@ -99,4 +99,13 @@ def updateThingSpeak(): #sends data to a webpage
        f.close() 
        sleep(30) #uploads sensor values every 30 secs
    except: 
-       print('oops that did not work...')   
+       print('oops that did not work...')
+      
+#The Full Raspberry Pi Flood Defense System
+
+print("Welcome to Raspberry Pi Flood Defense System")
+
+  gmail_user = input("Enter your full email address")
+  gmail_password = getpass.getpass(prompt="Type in your password")
+
+  
