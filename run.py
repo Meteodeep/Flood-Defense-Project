@@ -107,5 +107,9 @@ print("Welcome to Raspberry Pi Flood Defense System")
 
   gmail_user = input("Enter your full email address")
   gmail_password = getpass.getpass(prompt="Type in your password")
-
   
+  print("Please Wait.....")
+  sleep(1)
+  print("Taking Measuremnets NOW!")
+  
+  datacount = 0
